@@ -10,6 +10,8 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -27,4 +29,11 @@ jobs:
       - name: Install dependencies
         run: bun install
       - name: Run tests
-        run: bun test
+        run: bun test --coverage --coverage-reporter=lcov --coverage-dir=coverage
+      - name: Report coverage
+        if: github.event_name == 'pull_request'
+        uses: zgosalvez/github-actions-report-lcov@4eb99c09644c30cceb609413620bd9e1bf80ee79 # v6.0.1
+        with:
+          coverage-files: coverage/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          update-comment: true
