@@ -1,46 +1,24 @@
-// Configuration
-const GITHUB_NAMESPACE = "lukecarr";
 const MODULES = ["litmus"];
 
 export default {
-  async fetch(request) {
-    const url = new URL(request.url);
+  async fetch(request, { GITHUB_NAMESPACE }) {
+    const { hostname, pathname, searchParams } = new URL(request.url);
+    const moduleName = pathname.split("/")[1];
 
-    // Extract module name from path (first segment)
-    const pathSegments = url.pathname.split("/").filter(Boolean);
-    if (pathSegments.length === 0) {
+    if (!moduleName || !MODULES.includes(moduleName)) {
       return new Response("Not Found", { status: 404 });
     }
 
-    const moduleName = pathSegments[0];
+    const repoUrl = `https://github.com/${GITHUB_NAMESPACE}/${moduleName}`;
 
-    // Check if module exists
-    const module = MODULES.includes(moduleName);
-    if (!module) {
-      return new Response("Not Found", { status: 404 });
+    // Go toolchain request — serve the go-import meta tag
+    if (searchParams.get("go-get") === "1") {
+      return new Response(
+        `<!DOCTYPE html><meta name="go-import" content="${hostname}/${moduleName} git ${repoUrl}">`,
+        { headers: { "Content-Type": "text/html; charset=utf-8" } },
+      );
     }
 
-    const vanityImportPath = `${url.hostname}/${moduleName}`;
-    const githubRepoUrl = `https://github.com/${GITHUB_NAMESPACE}/${moduleName}`;
-
-    // Handle go-get requests
-    if (url.searchParams.get("go-get") === "1") {
-      const html = `<!DOCTYPE html>
-<html>
-<head>
-<meta name="go-import" content="${vanityImportPath} git ${githubRepoUrl}">
-</head>
-<body>
-go get ${vanityImportPath}
-</body>
-</html>`;
-
-      return new Response(html, {
-        headers: { "Content-Type": "text/html; charset=utf-8" },
-      });
-    }
-
-    // Browser request - redirect to GitHub
-    return Response.redirect(githubRepoUrl, 302);
+    return Response.redirect(repoUrl, 302);
   },
 };

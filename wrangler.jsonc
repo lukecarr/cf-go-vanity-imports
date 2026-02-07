@@ -1,15 +1,18 @@
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "go-vanity-imports",
-	"main": "src/index.js",
-	"compatibility_date": "2025-12-25",
-	"observability": {
-		"enabled": true
-	},
-	"routes": [
-		{
-			"pattern": "go.carr.sh",
-			"custom_domain": true
-		}
-	]
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "go-vanity-imports",
+  "main": "src/index.js",
+  "compatibility_date": "2025-12-25",
+  "observability": {
+    "enabled": true,
+  },
+  "vars": {
+    "GITHUB_NAMESPACE": "lukecarr",
+  },
+  "routes": [
+    {
+      "pattern": "go.carr.sh",
+      "custom_domain": true,
+    },
+  ],
 }

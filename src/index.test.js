@@ -9,7 +9,9 @@ const TEST_DOMAIN = "go.carr.sh";
  * @returns {Promise<Response>}
  */
 function request(path) {
-  return worker.fetch(new Request(`https://${TEST_DOMAIN}${path}`));
+  return worker.fetch(new Request(`https://${TEST_DOMAIN}${path}`), {
+    GITHUB_NAMESPACE: "lukecarr",
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -64,12 +66,6 @@ describe("go-get request", () => {
     );
   });
 
-  test("body includes go get instruction", async () => {
-    const res = await request("/litmus?go-get=1");
-    const html = await res.text();
-    expect(html).toContain(`go get ${TEST_DOMAIN}/litmus`);
-  });
-
   test("go-get with subpath still resolves the module", async () => {
     const res = await request("/litmus/subpackage?go-get=1");
     expect(res.status).toBe(200);
@@ -112,6 +108,7 @@ describe("domain from request URL", () => {
   test("uses the request hostname in go-import meta tag", async () => {
     const res = await worker.fetch(
       new Request("https://custom.example.com/litmus?go-get=1"),
+      { GITHUB_NAMESPACE: "lukecarr" },
     );
     const html = await res.text();
     expect(html).toContain(
