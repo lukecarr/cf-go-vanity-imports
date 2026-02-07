@@ -8,7 +8,7 @@ const moduleData = MODULES.reduce(
     ...acc,
     [module]: {
       vanityImportPath: `${VANITY_DOMAIN}/${module}`,
-      githubRepoUrl: `https://github.com /${GITHUB_NAMESPACE}/${module}`,
+      githubRepoUrl: `https://github.com/${GITHUB_NAMESPACE}/${module}`,
     },
   }),
   {},
