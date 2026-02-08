@@ -26,7 +26,7 @@ Modules are registered in the `MODULES` array in `src/index.js`. Each entry maps
 
 ### Prerequisites
 
-The only prerequisite is [Bun](https://bun.sh/). The specific version of Bun is pinned in [.bun-version](/.bun-version).
+The only prerequisite is [Bun](https://bun.sh/). The specific version of Bun is pinned in the [.bun-version](/.bun-version) file.
 
 ### Install dependencies
 
