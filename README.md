@@ -26,9 +26,9 @@ In the below example, the `litmus` module is served at `go.carr.sh/litmus` and p
 
 ```js
 const MODULES = {
-  litmus: "github.com/lukecarr/litmus",
+  litmus: "https://github.com/lukecarr/litmus",
 };
-```  
+```
 
 ## Getting started
 
