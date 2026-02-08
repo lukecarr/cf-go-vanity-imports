@@ -9,9 +9,7 @@ const TEST_DOMAIN = "go.carr.sh";
  * @returns {Promise<Response>}
  */
 function request(path) {
-  return worker.fetch(new Request(`https://${TEST_DOMAIN}${path}`), {
-    GITHUB_NAMESPACE: "lukecarr",
-  });
+  return worker.fetch(new Request(`https://${TEST_DOMAIN}${path}`));
 }
 
 // ---------------------------------------------------------------------------
@@ -41,6 +39,11 @@ describe("unknown module", () => {
   test("body says Not Found", async () => {
     const res = await request("/unknown-module");
     expect(await res.text()).toBe("Not Found");
+  });
+
+  test("returns 404 for prototype-inherited key", async () => {
+    const res = await request("/__proto__");
+    expect(res.status).toBe(404);
   });
 });
 
@@ -108,7 +111,6 @@ describe("domain from request URL", () => {
   test("uses the request hostname in go-import meta tag", async () => {
     const res = await worker.fetch(
       new Request("https://custom.example.com/litmus?go-get=1"),
-      { GITHUB_NAMESPACE: "lukecarr" },
     );
     const html = await res.text();
     expect(html).toContain(

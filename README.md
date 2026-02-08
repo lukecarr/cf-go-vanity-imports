@@ -1,6 +1,6 @@
 # cf-go-vanity-imports
 
-> **Proof of concept** for a tiny Cloudflare Worker that serves [Go vanity import paths](https://pkg.go.dev/cmd/go#hdr-Remote_import_paths) with just ~20 lines of JavaScript.
+> **Proof of concept** for a tiny Cloudflare Worker that serves [Go vanity import paths](https://pkg.go.dev/cmd/go#hdr-Remote_import_paths) with just ~25 lines of JavaScript.
 >
 > Currently powering [`go.carr.sh`](https://go.carr.sh).
 
@@ -20,7 +20,15 @@ If a regular browser hits the same URL (without `?go-get=1`), the worker redirec
 
 ## Adding a module
 
-Modules are registered in the `MODULES` array in `src/index.js`. Each entry maps to a GitHub repo under the configured `GITHUB_NAMESPACE` (configured in `wrangler.jsonc` under `vars.GITHUB_NAMESPACE`).
+Modules are registered in the `MODULES` object in `src/index.js`. Each property associates a module name (i.e. `go.carr.sh/<module name>`) with a repo.
+
+In the below example, the `litmus` module is served at `go.carr.sh/litmus` and points to the `lukecarr/litmus` GitHub repo:
+
+```js
+const MODULES = {
+  litmus: "https://github.com/lukecarr/litmus",
+};
+```
 
 ## Getting started
 

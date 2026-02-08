@@ -6,9 +6,6 @@
   "observability": {
     "enabled": true,
   },
-  "vars": {
-    "GITHUB_NAMESPACE": "lukecarr",
-  },
   "routes": [
     {
       "pattern": "go.carr.sh",
