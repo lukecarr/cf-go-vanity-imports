@@ -20,7 +20,7 @@ If a regular browser hits the same URL (without `?go-get=1`), the worker redirec
 
 ## Adding a module
 
-Modules are registered in the `MODULES` array in `src/index.js`. Each entry maps to a GitHub repo under the configured `GITHUB_NAMESPACE` (set as an environment variable in `wrangler.jsonc`).
+Modules are registered in the `MODULES` array in `src/index.js`. Each entry maps to a GitHub repo under the configured `GITHUB_NAMESPACE` (configured in `wrangler.jsonc` under `vars.GITHUB_NAMESPACE`).
 
 ## Getting started
 
