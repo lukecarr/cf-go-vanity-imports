@@ -26,9 +26,11 @@ Modules are registered in the `MODULES` array in `src/index.js`. Each entry maps
 
 ### Prerequisites
 
-- [Bun](https://bun.sh/)
+The only prerequisite is [Bun](https://bun.sh/). The specific version of Bun is pinned in [.bun-version](/.bun-version).
 
 ### Install dependencies
+
+Install the worker's dependencies with Bun:
 
 ```sh
 bun install
@@ -36,14 +38,18 @@ bun install
 
 ### Run locally
 
+Run the worker in development mode with hot reloading:
+
 ```sh
 bun run dev
 ```
 
 ### Run tests
 
+Run tests with coverage reporting (we strive for 100% coverage):
+
 ```sh
-bun test
+bun test --coverage
 ```
 
 ## Deployment
