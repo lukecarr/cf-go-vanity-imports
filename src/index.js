@@ -7,7 +7,7 @@ export default {
     const { hostname, pathname, searchParams } = new URL(request.url);
     const moduleName = pathname.split("/")[1];
 
-    if (!moduleName || !MODULES[moduleName]) {
+    if (!moduleName || !Object.hasOwn(MODULES, moduleName)) {
       return new Response("Not Found", { status: 404 });
     }
 

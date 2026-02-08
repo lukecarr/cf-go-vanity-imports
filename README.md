@@ -20,7 +20,7 @@ If a regular browser hits the same URL (without `?go-get=1`), the worker redirec
 
 ## Adding a module
 
-Modules are registered in the `MODULES` array in `src/index.js`. Each entry maps a module name (i.e. `go.carr.sh/<module name>`) to a repo.
+Modules are registered in the `MODULES` object in `src/index.js`. Each property associates a module name (i.e. `go.carr.sh/<module name>`) with a repo.
 
 In the below example, the `litmus` module is served at `go.carr.sh/litmus` and points to the `lukecarr/litmus` GitHub repo:
 
