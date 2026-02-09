@@ -60,6 +60,14 @@ Run tests with coverage reporting (we strive for 100% coverage):
 bun test --coverage
 ```
 
+### Lint & format
+
+Lint and format the codebase (with auto-fix) using [Biome](https://biomejs.dev/):
+
+```sh
+bun run check
+```
+
 ## Deployment
 
 The worker is deployed to Cloudflare via [Wrangler](https://developers.cloudflare.com/workers/wrangler/):
