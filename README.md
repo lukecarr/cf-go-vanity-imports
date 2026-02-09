@@ -10,13 +10,17 @@ Go vanity imports let you use a custom domain (e.g. `go.carr.sh/litmus`) as the 
 
 When the Go toolchain fetches a module it sends a `?go-get=1` query parameter. The worker responds with an HTML page containing a `<meta name="go-import">` tag that points to the corresponding GitHub repository:
 
+```sh
+$ curl 'https://go.carr.sh/litmus?go-get=1'
+<!DOCTYPE html><meta name="go-import" content="go.carr.sh/litmus git https://github.com/lukecarr/litmus">
 ```
-GET https://go.carr.sh/litmus?go-get=1
 
-→ <meta name="go-import" content="go.carr.sh/litmus git https://github.com/lukecarr/litmus">
+If a regular browser hits the same URL (without `?go-get=1`), the worker redirects to the GitHub repo instead:
+
+```sh
+$ curl -is 'https://go.carr.sh/litmus' | grep location
+location: https://github.com/lukecarr/litmus
 ```
-
-If a regular browser hits the same URL (without `?go-get=1`), the worker redirects to the GitHub repo instead.
 
 ## Adding a module
 
