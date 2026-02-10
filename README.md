@@ -1,6 +1,6 @@
 # cf-go-vanity-imports
 
-> **Proof of concept** for a tiny Cloudflare Worker that serves [Go vanity import paths](https://pkg.go.dev/cmd/go#hdr-Remote_import_paths) with just ~25 lines of JavaScript.
+> **Proof of concept** for a tiny Cloudflare Worker that serves [Go vanity import paths](https://pkg.go.dev/cmd/go#hdr-Remote_import_paths) with just ~40 lines of JavaScript.
 >
 > Currently powering [`go.carr.sh`](https://go.carr.sh).
 

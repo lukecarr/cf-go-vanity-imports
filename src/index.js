@@ -2,9 +2,22 @@ const MODULES = {
 	litmus: "https://github.com/lukecarr/litmus",
 };
 
+const MODULES_LIST = Object.entries(MODULES)
+	.sort(([a, _], [b, _]) => a - b)
+	.map(([moduleName, repoUrl]) => `<li>${moduleName}: ${repoUrl}</li>`)
+	.join("");
+
 export default {
-	async fetch(request) {
-		const { hostname, pathname, searchParams } = new URL(request.url);
+	async fetch({ url }) {
+		const { hostname, pathname, searchParams } = new URL(url);
+
+		if (pathname === "/") {
+			return new Response(
+				`<!DOCTYPE html><ul>${MODULES_LIST}</ul>`,
+				{ headers: { "Content-Type": "text/html; charset=utf-8" } },
+			);
+		}
+
 		const moduleName = pathname.split("/")[1];
 
 		if (!moduleName || !Object.hasOwn(MODULES, moduleName)) {
