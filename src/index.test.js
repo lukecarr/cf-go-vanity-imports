@@ -24,7 +24,7 @@ describe("root path", () => {
 	test("body contains list", async () => {
 		const res = await request("/");
 		expect(res.status).toBe(200);
-		const text = await res.text()
+		const text = await res.text();
 		expect(text).toContain("<ul>");
 		expect(text).toContain("</ul>");
 	});
