@@ -3,7 +3,7 @@ const MODULES = {
 };
 
 const MODULES_LIST = Object.entries(MODULES)
-	.sort(([a, _], [b, _]) => a - b)
+	.sort((a, b) => a[0].localCompare(b[0]))
 	.map(([moduleName, repoUrl]) => `<li>${moduleName}: ${repoUrl}</li>`)
 	.join("");
 
