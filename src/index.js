@@ -12,10 +12,9 @@ export default {
 		const { hostname, pathname, searchParams } = new URL(url);
 
 		if (pathname === "/") {
-			return new Response(
-				`<!DOCTYPE html><ul>${MODULES_LIST}</ul>`,
-				{ headers: { "Content-Type": "text/html; charset=utf-8" } },
-			);
+			return new Response(`<!DOCTYPE html><ul>${MODULES_LIST}</ul>`, {
+				headers: { "Content-Type": "text/html; charset=utf-8" },
+			});
 		}
 
 		const moduleName = pathname.split("/")[1];
