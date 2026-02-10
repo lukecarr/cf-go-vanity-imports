@@ -4,7 +4,10 @@ const MODULES = {
 
 const MODULES_LIST = Object.entries(MODULES)
 	.sort((a, b) => a[0].localCompare(b[0]))
-	.map(([moduleName, repoUrl]) => `<li>${moduleName}: <a href="${repoUrl}" target="_blank" rel="noopener">${repoUrl}</a></li>`)
+	.map(
+		([moduleName, repoUrl]) =>
+			`<li>${moduleName}: <a href="${repoUrl}" target="_blank" rel="noopener">${repoUrl}</a></li>`,
+	)
 	.join("");
 
 export default {
