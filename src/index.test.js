@@ -16,14 +16,17 @@ function request(path) {
 // Root path
 // ---------------------------------------------------------------------------
 describe("root path", () => {
-	test("returns 404", async () => {
+	test("returns 200", async () => {
 		const res = await request("/");
-		expect(res.status).toBe(404);
+		expect(res.status).toBe(200);
 	});
 
-	test("body says Not Found", async () => {
+	test("body contains list", async () => {
 		const res = await request("/");
-		expect(await res.text()).toBe("Not Found");
+		expect(res.status).toBe(200);
+		const text = await res.text();
+		expect(text).toContain("<ul>");
+		expect(text).toContain("</ul>");
 	});
 });
 
